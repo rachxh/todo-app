@@ -1,6 +1,7 @@
 window.onload = loadTasks;
 
 function loadTasks() {
+  if (localStorage.getItem("tasks") === null) return;
   let tasks = Array.from(JSON.parse(localStorage.getItem("tasks")));
 
   tasks.forEach((task) => {
@@ -17,7 +18,8 @@ function loadTasks() {
   });
 }
 
-function addTask() {
+function addTask(event) {
+  event.preventDefault();
   const task = document.querySelector("form input");
   const list = document.querySelector("ul");
 
@@ -25,16 +27,12 @@ function addTask() {
     alert("Please add some task!");
     return false;
   }
-
-  let tasks = Array.from(JSON.parse(localStorage.getItem("tasks")));
-
-  tasks.forEach((todo) => {
-    if (todo.task === task.value) {
-      alert("Task already exist!");
-      task.value = "";
-      return;
-    }
-  });
+  let tasks;
+  if (localStorage.getItem("tasks") === null) {
+    tasks = [];
+  } else {
+    tasks = Array.from(JSON.parse(localStorage.getItem("tasks")));
+  }
 
   localStorage.setItem(
     "tasks",
@@ -73,6 +71,8 @@ function removeTask(event) {
   });
   localStorage.setItem("tasks", JSON.stringify(tasks));
   event.parentElement.remove();
+
+  event.classList.add("fall");
 }
 
 var currentTask = null;
@@ -84,20 +84,6 @@ function getCurrentTask(event) {
 function editTask(event) {
   let tasks = Array.from(JSON.parse(localStorage.getItem("tasks")));
 
-  if (event.value === "") {
-    alert("Task is empty!");
-    event.value = currentTask;
-    return;
-  }
-
-  tasks.forEach((task) => {
-    if (task.task === event.value) {
-      alert("Task already exist!");
-      event.value = currentTask;
-      return;
-    }
-  });
-
   tasks.forEach((task) => {
     if (task.task === currentTask) {
       task.task = event.value;
@@ -106,3 +92,9 @@ function editTask(event) {
 
   localStorage.setItem("tasks", JSON.stringify(tasks));
 }
+
+const clearAll = document.querySelector("#clearAll");
+clearAll.addEventListener("click", () => {
+  localStorage.clear();
+  location.reload();
+});

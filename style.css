@@ -5,7 +5,7 @@
   box-sizing: border-box;
 }
 body {
-  background: linear-gradient(120deg, purple, rgb(135, 27, 223));
+  background-image: linear-gradient(120deg, pink, white);
 
   font-family: "Lato", sans-serif;
 }
@@ -15,21 +15,20 @@ body {
   flex-direction: column;
   align-items: center;
   padding-top: 50px;
-  background-color: #e1e3ea;
   height: 100vh;
 }
 
-.app {
+.todo-container {
   width: 60%;
 }
 
 @media (max-width: 768px) {
-  .app {
+  .todo-container {
     width: 90%;
   }
 }
 
-.app h1 {
+.todo-container h1 {
   color: white;
   font-size: 40px;
   padding: 10px 0;
@@ -38,17 +37,17 @@ body {
   background-color: #af46af;
 }
 
-.app form {
+.todo-container form {
   display: flex;
   width: 100%;
   background-color: #262e4c;
 }
 
-.app form input {
+.todo-container form input {
   border: none;
-  background-color: #3cbdce;
+  background-color: white;
   font-size: 18px;
-  color: white;
+  color: #333;
   padding: 10px;
   width: 90%;
 }
@@ -66,37 +65,56 @@ input {
   margin: 0;
   border: none;
   border-radius: 0;
-  width: 80%;
+  width: 70%;
   padding: 10px;
 
   font-size: 16px;
 }
 
-.app form button {
+li {
+  display: flex;
+  direction: column;
+  justify-content: center;
+  align-items: center;
+}
+li input {
+  margin: 0.2rem;
+  border: none;
+  border-radius: 5px;
+  width: 90%;
+  /* padding: 1.5rem; */
+
+  font-size: 1rem;
+}
+
+.todo-button {
   border: none;
   color: white;
-  background-color: #1dd2af;
+  background-color: #f00f78;
   font-size: 25px;
   font-weight: 600;
   height: 42px;
-  width: 10%;
+  width: 12%;
   cursor: pointer;
 }
-
-button:hover {
-  background-color: rgb(36, 166, 226);
+.clear-button {
+  font-size: 1rem;
+  background-color: rgb(156, 53, 240);
+  width: 15%;
+  border: none;
+  color: white;
 }
 
-.app ul {
+.todo-container ul {
   list-style: none;
   color: #e0e0e0;
   padding: 0;
 }
 
-.app ul li {
+.todo-container ul li {
   padding: 10px;
-  background-color: #262e4c;
-  border-bottom: 1px solid #3a4674;
+  background-color: plum;
+  border-bottom: 1px solid rgb(191, 69, 228);
 }
 
 .check {
@@ -120,16 +138,21 @@ button:hover {
   outline: none;
 }
 
-.app ul li i {
+.todo-container ul li i {
   float: right;
   cursor: pointer;
 }
 
-.app ul li i:hover {
+.todo-container ul li i:hover {
   color: rgb(255, 82, 82);
 }
 
 .completed {
   color: rgba(192, 192, 192, 0.842);
   text-decoration: line-through;
+}
+
+.fall {
+  transform: translateX(8rem) rotateZ(20deg);
+  opacity: 0;
 }
